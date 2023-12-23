@@ -19,6 +19,7 @@
 		4A302A0B2B36F72A00A8B5DF /* PlayerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A302A0A2B36F72A00A8B5DF /* PlayerVM.swift */; };
 		4A302A0D2B36F89900A8B5DF /* PlayerPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A302A0C2B36F89900A8B5DF /* PlayerPage.swift */; };
 		4A302A122B37031800A8B5DF /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A302A112B37031800A8B5DF /* AudioPlayer.swift */; };
+		4A691D7B2B3759FB00115ED7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4A691D7A2B3759FB00115ED7 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		4A302A0A2B36F72A00A8B5DF /* PlayerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerVM.swift; sourceTree = "<group>"; };
 		4A302A0C2B36F89900A8B5DF /* PlayerPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPage.swift; sourceTree = "<group>"; };
 		4A302A112B37031800A8B5DF /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		4A691D7A2B3759FB00115ED7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		4A3029DD2B36F51200A8B5DF = {
 			isa = PBXGroup;
 			children = (
+				4A691D7A2B3759FB00115ED7 /* README.md */,
 				4A3029E82B36F51300A8B5DF /* AudioPlayer */,
 				4A3029E72B36F51300A8B5DF /* Products */,
 			);
@@ -189,6 +192,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A691D7B2B3759FB00115ED7 /* README.md in Resources */,
 				4A3029EE2B36F51500A8B5DF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

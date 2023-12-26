@@ -17,8 +17,8 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(homeVM.songData) { song in
-                    SongItemView(item: song)
+                ForEach(Array(homeVM.songData.enumerated()), id:\.offset) { index, song in
+                    SongItemView(song: song)
                 }
             }
             .navigationDestination(item: $selectedSong, destination: { item in
@@ -32,6 +32,7 @@ struct HomeView: View {
     func setupPlayer() {
         var itemList: [AVPlayerItem] = []
         
+        
         for song in homeVM.songData {
             itemList.append(AVPlayerItem(url: song.url!))
         }
@@ -39,12 +40,12 @@ struct HomeView: View {
     }
     
     @ViewBuilder
-    func SongItemView(item: SongModel) -> some View {
-        Button(action: { 
-            let currentItem = playerVM.player.items()[
-            playerVM.player.replaceCurrentItem(with: currentItem)
+    func SongItemView(song: SongModel) -> some View {
+        Button(action: {
+            selectedSong = song
+            //playerVM.player.replaceCurrentItem(with: AVPlayerItem(url: song.url!))
         }) {
-            Text(item.title)
+            Text(song.title)
         }
     }
 }

@@ -9,6 +9,8 @@ import SwiftUI
 import AVKit
 
 struct HomeView: View {
+    @EnvironmentObject var notificationService: NotificationService
+    
     @StateObject var homeVM: HomePageVM = .init()
     @StateObject var playerVM: PlayerVM = .init()
     
@@ -16,14 +18,18 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(Array(homeVM.songData.enumerated()), id:\.offset) { index, song in
-                    SongItemView(song: song)
+            VStack {
+                List {
+                    ForEach(Array(homeVM.songData.enumerated()), id:\.offset) { index, song in
+                        SongItemView(song: song)
+                    }
                 }
+                .navigationDestination(item: $selectedSong, destination: { item in
+                    PlayerPage(item: item)
+                })
+                
+                NotificationContent()
             }
-            .navigationDestination(item: $selectedSong, destination: { item in
-                PlayerPage(item: item)
-            })
         }
         .onAppear(perform: setupPlayer)
         .environmentObject(playerVM)
@@ -48,8 +54,51 @@ struct HomeView: View {
             Text(song.title)
         }
     }
+    
+    @ViewBuilder
+    func NotificationContent() -> some View {
+        VStack {
+            Image(systemName: "figure.gymnastics")
+                .resizable()
+                .foregroundColor(.red)
+                .frame(width: 100, height: 100)
+            
+            Text("Hello, Gymnastics!")
+                .font(.title)
+            
+            Button("Send Notification") {
+                notificationService.scheduleNotification(title: "1 new message", subtitle: "The meeting tomorrow is rescheduled...")
+            }
+            .buttonStyle(.borderedProminent)
+            .padding()
+            
+            Button("Request Permissions") {
+                Task { await notificationService.requestPushNotificationAuthorization() }
+            }
+            .buttonStyle(.borderedProminent)
+            .padding()
+            
+            Stepper("Badge Number \(notificationService.badgeNumber != 0 ? notificationService.badgeNumber.description : "")", value: $notificationService.badgeNumber, in: 0...Int.max)
+            
+        }
+        .fullScreenCover(isPresented: $notificationService.showSettingsPage, content: {
+            // your settings page here
+            VStack {
+                Text("Settings Page").font(.title)
+                Text("All your settings here").font(.subheadline)
+                Button("Dismiss") {
+                    notificationService.showSettingsPage = false
+                }
+                .padding()
+                .buttonStyle(.borderedProminent)
+            }
+        })
+        .padding()
+    }
 }
+
 
 #Preview {
     HomeView()
+        .environmentObject(NotificationService())
 }
